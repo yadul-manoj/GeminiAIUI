@@ -1,0 +1,90 @@
+.card {
+  // border-radius: 0px;
+  background-color: #424242;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+
+  .form-field-box {
+    margin-bottom: 10px;
+  }
+
+  .form-label {
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 0px;
+  }
+
+  .form-control {
+    background-color: rgba(59, 59, 59, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #fff;
+
+    :disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .form-control:disabled {
+    background-color: gray !important;
+    opacity: 0.75;
+    cursor: not-allowed;
+  }
+
+  .job-text-area {
+    height: 200px;
+  }
+
+  ::placeholder {
+    color: #b4b4b4;
+    opacity: 1;
+  }
+
+  .response-header {
+    display: flex;
+    justify-content: end;
+    background-color: #171717;
+    padding: 5px 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    .save-pdf-btn {
+      display: flex;
+      align-items: center;
+      background-color: #000;
+      color: #fff;
+      border-radius: 4px;
+
+      .save-pdf-btn-text {
+        padding-left: 5px;
+        font-size: 10px;
+      }
+
+    }
+
+    .save-pdf-btn:disabled {
+      background-color: gray;
+      opacity: 0.75;
+      cursor: not-allowed;
+    }
+  }
+
+  .response-body {
+    background-color: #000;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 94%;
+
+    .response-text-area {
+      width: 100%;
+      height: 100%;
+      background: none;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+    }
+  }
+
+  .btn {
+    font-weight: 700;
+    // color: #fff;
+  }
+}
