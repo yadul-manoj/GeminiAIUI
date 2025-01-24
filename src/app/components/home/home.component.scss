@@ -1,3 +1,7 @@
+.form-check-label {
+  color: #fff;
+}
+
 .card {
   // border-radius: 0px;
   background-color: #424242;
@@ -31,6 +35,10 @@
 
   .job-text-area {
     height: 200px;
+  }
+
+  .job-desc-text-area {
+    height: 400px;
   }
 
   ::placeholder {
@@ -71,7 +79,7 @@
     background-color: #000;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    height: 94%;
+    flex-grow: 1;
 
     .response-text-area {
       width: 100%;

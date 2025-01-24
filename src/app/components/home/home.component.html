@@ -1,99 +1,170 @@
 <div class="container mt-5">
- <div class="row">
-  <div class="col-12">
-    <div class="card shadow-sm p-4">
-      <div class="row">
-        <div class="col-md-6 pr-md-5">
-          <div class="mb-3">
-            <div class="row">
-              <div class="col-md-6 form-field-box">
-                <label for="name" class="form-label">Name</label>
-                <input
-                  id="name"
-                  class="form-control"
-                  [(ngModel)]="name"
-                  placeholder="Enter details"
-                />
-              </div>
-              <div class="col-md-6 form-field-box">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  id="email"
-                  class="form-control"
-                  [(ngModel)]="email"
-                  placeholder="Enter details"
-                />
-              </div>
-              <div class="col-md-6 form-field-box">
-                <label for="educational-preparation" class="form-label">Educational Preparation</label>
-                <input
-                  id="educational-preparation"
-                  class="form-control"
-                  [(ngModel)]="educationalPreparation"
-                  placeholder="Enter details"
-                />
-              </div>
-              <div class="col-md-6 form-field-box">
-                <label for="school-certificates" class="form-label">School Certificates</label>
-                <input
-                  id="school-certificates"
-                  class="form-control"
-                  [(ngModel)]="schoolCertificates"
-                  placeholder="Enter details"
-                />
-              </div>
-              <div class="col-md-6 form-field-box">
-                <label for="employment-info" class="form-label">Employment Information</label>
-                <input
-                  id="employment-info"
-                  class="form-control"
-                  [(ngModel)]="employmentInformation"
-                  placeholder="Enter details"
-                />
-              </div>
-              <div class="col-md-6 form-field-box">
-                <label for="student-teaching-exp" class="form-label">Student Teaching Experience</label>
-                <input
-                  id="student-teaching-exp"
-                  class="form-control"
-                  [(ngModel)]="studentTeachingExp"
-                  placeholder="Enter details"
-                />
-              </div>
-              <div class="col-12 form-field-box">
-                <label class="form-label">
-                  Job Specific Information
+  <div class="row pb-2">
+    <div class="col-12 d-flex">
+      <div class="form-check pe-3">
+        <input
+          type="radio"
+          id="coverLetter"
+          name="documentType"
+          class="form-check-input"
+          [value]="'Cover Letter'"
+          [(ngModel)]="menuOption"
+        />
+        <label for="coverLetter" class="form-check-label">Cover Letter</label>
+      </div>
+      <div class="form-check">
+        <input
+          type="radio"
+          id="jobDescription"
+          name="documentType"
+          class="form-check-input"
+          [value]="'Job Description'"
+          [(ngModel)]="menuOption"
+        />
+        <label for="jobDescription" class="form-check-label"
+          >Job Description</label
+        >
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm p-4">
+        <div class="row">
+          <div class="col-md-6">
+            <div *ngIf="menuOption === 'Cover Letter'" class="mb-3">
+              <div class="row">
+                <div class="col-md-6 form-field-box">
+                  <label for="name" class="form-label">Name</label>
                   <input
-                    type="checkbox"
-                    [(ngModel)]="isChecked"
+                    id="name"
+                    class="form-control"
+                    [(ngModel)]="name"
+                    placeholder="Enter details"
                   />
-                </label>
-                <textarea class="form-control job-text-area w-100" [disabled]="!isChecked">{{ jobSpecificInfo }}</textarea>
+                </div>
+                <div class="col-md-6 form-field-box">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    id="email"
+                    class="form-control"
+                    [(ngModel)]="email"
+                    placeholder="Enter details"
+                  />
+                </div>
+                <div class="col-md-6 form-field-box">
+                  <label for="educational-preparation" class="form-label"
+                    >Educational Preparation</label
+                  >
+                  <input
+                    id="educational-preparation"
+                    class="form-control"
+                    [(ngModel)]="educationalPreparation"
+                    placeholder="Enter details"
+                  />
+                </div>
+                <div class="col-md-6 form-field-box">
+                  <label for="school-certificates" class="form-label"
+                    >School Certificates</label
+                  >
+                  <input
+                    id="school-certificates"
+                    class="form-control"
+                    [(ngModel)]="schoolCertificates"
+                    placeholder="Enter details"
+                  />
+                </div>
+                <div class="col-md-6 form-field-box">
+                  <label for="employment-info" class="form-label"
+                    >Employment Information</label
+                  >
+                  <input
+                    id="employment-info"
+                    class="form-control"
+                    [(ngModel)]="employmentInformation"
+                    placeholder="Enter details"
+                  />
+                </div>
+                <div class="col-md-6 form-field-box">
+                  <label for="student-teaching-exp" class="form-label"
+                    >Student Teaching Experience</label
+                  >
+                  <input
+                    id="student-teaching-exp"
+                    class="form-control"
+                    [(ngModel)]="studentTeachingExp"
+                    placeholder="Enter details"
+                  />
+                </div>
+                <div class="col-12 form-field-box">
+                  <label class="form-label">
+                    Job Specific Information
+                    <input type="checkbox" [(ngModel)]="isChecked" />
+                  </label>
+                  <textarea
+                    class="form-control job-text-area w-100"
+                    [disabled]="!isChecked"
+                    >{{ jobSpecificInfo }}</textarea
+                  >
+                </div>
               </div>
             </div>
+
+            <div *ngIf="menuOption === 'Job Description'" class="mb-3">
+              <textarea class="form-control job-desc-text-area w-100">{{
+                jobDetails
+              }}</textarea>
+            </div>
+            <button
+              class="btn btn-primary w-100"
+              (click)="onGenerate()"
+              [disabled]="disableGenerate()"
+            >
+              {{ loading ? "Generating..." : "Generate" }}
+            </button>
           </div>
-          <button
-            class="btn btn-primary w-100"
-            (click)="onGenerate()"
-            [disabled]="disableGenerate()"
-          >
-            {{ loading ? 'Generating...' : 'Generate' }}
-          </button>
-        </div>
-        <div class="col-md-6 pl-md-5">
-          <div class="card h-100">
-            <div class="col-12 response-header">
-              <button class="save-pdf-btn" [disabled]="error || !response" (click)="savePDF()">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="12" height="12"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
-                <span class="save-pdf-btn-text">Save as PDF</span>
-              </button>
-            </div>
-            <div *ngIf="!loading" class="col-12 response-body">
-              <textarea class="response-text-area px-2">{{ error ? error : response }}</textarea>
-            </div>
-            <div *ngIf="loading" class="d-flex justify-content-center mt-5">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
+
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="col-12 response-header">
+                <button
+                  class="save-pdf-btn"
+                  [disabled]="
+                    error ||
+                    (menuOption === 'Cover Letter' && !coverLetterResponse) ||
+                    (menuOption === 'Job Description' &&
+                      !jobDescriptionResponse)
+                  "
+                  (click)="savePDF()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 512 512"
+                    width="12"
+                    height="12"
+                  >
+                    <!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                    <path
+                      fill="#ffffff"
+                      d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
+                    />
+                  </svg>
+                  <span class="save-pdf-btn-text">Save as PDF</span>
+                </button>
+              </div>
+              <div *ngIf="!loading" class="col-12 response-body">
+                <textarea class="response-text-area px-2">{{
+                  error
+                    ? error
+                    : menuOption === "Cover Letter"
+                    ? coverLetterResponse
+                    : jobDescriptionResponse
+                }}</textarea>
+              </div>
+              <div *ngIf="loading" class="d-flex justify-content-center mt-5">
+                <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
               </div>
             </div>
           </div>
@@ -101,5 +172,4 @@
       </div>
     </div>
   </div>
- </div>
 </div>
